@@ -11,8 +11,18 @@ DB_FAISS_PATH="vectorstore/db_faiss"
 
 @st.cache_resource
 def get_vectorstore():
-    embedding_model=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-    db=FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
+    embedding_model = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
+    
+    if not os.path.exists(DB_FAISS_PATH):
+        st.error(f"FAISS directory not found: {DB_FAISS_PATH}")
+        return None
+    
+    if not os.path.exists(os.path.join(DB_FAISS_PATH, "index.faiss")):
+        st.error("FAISS index file 'index.faiss' is missing!")
+        return None
+
+    st.success("FAISS index found, loading...")
+    db = FAISS.load_local(DB_FAISS_PATH, embedding_model, allow_dangerous_deserialization=True)
     return db
 
 def set_custom_prompt(custom_prompt_template):
