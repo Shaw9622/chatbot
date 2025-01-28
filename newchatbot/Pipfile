@@ -1,0 +1,11 @@
+[packages]
+langchain_community = "*"
+langchain = "*"
+streamlit = "*"
+huggingface_hub = "*"
+faiss-cpu = "*"
+python-dotenv = "*"
+transformers = "*"
+
+[requires]
+python_version = "3.8.10"
