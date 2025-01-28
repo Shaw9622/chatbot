@@ -7,7 +7,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEndpoint
 
-DB_FAISS_PATH="newchatbot/vectorstore/db_faiss"
+DB_FAISS_PATH="vectorstore/db_faiss"
 
 @st.cache_resource
 def get_vectorstore():
